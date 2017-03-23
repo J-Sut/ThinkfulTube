@@ -9,6 +9,7 @@
 var YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/search";
 
 // 2) f(modify-state)
+
 function getApiData(search, callback) {
 	var query = {
 		part: 'snippet',
@@ -20,16 +21,22 @@ function getApiData(search, callback) {
 	$.getJSON(YOUTUBE_URL, query, callback)
 };
 
-function renderCallBack(data) {
-	console.log("from renderCallBack ");
-	console.log(data.items[0].snippet.thumbnails.high.url);
-	var imageURL = data.items[0].snippet.thumbnails.medium.url;
-	$('.js-search-results').append("<img src='imageURL'>");
+// 3) f(render-state)
 
+
+function renderCallBack(data) {
+	$('.js-search-results').empty();
+	console.log(data);
+	for (var i = 0; data.items.length > i; i++) {
+		console.log(data.items[i].snippet.thumbnails.medium.url);
+		var imageURL = data.items[i].snippet.thumbnails.medium.url;
+		var img = $('<img>', {src: imageURL, class: "pics"});
+		$('.js-search-results').append(img);
+	};
+/*
+	*/
 
 };
-
-// 3) f(render-state)
 
 // 4) event listeners
 
@@ -37,7 +44,6 @@ $('.js-search-form').submit(function(e) {
 //	console.log("from submit event")
 	e.preventDefault();
 	var query = $(this).find('#searchText').val();
-	var a = "test"
 
 	getApiData(query, renderCallBack);
 });
