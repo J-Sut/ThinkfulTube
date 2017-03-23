@@ -16,7 +16,6 @@ function getApiData(search, callback) {
 		key: 'AIzaSyDGoQFxuEyp6h2c6zoDDVl9L71Rs11R5N0',
 		q: search
 	}
-	console.log('Api function: ' + query.q + " = query.q");
 
 	$.getJSON(YOUTUBE_URL, query, callback)
 };
@@ -25,17 +24,17 @@ function getApiData(search, callback) {
 
 
 function renderCallBack(data) {
+	//clear previous results if any
 	$('.js-search-results').empty();
-	console.log(data);
 	for (var i = 0; data.items.length > i; i++) {
 		console.log(data.items[i].snippet.thumbnails.medium.url);
+		console.log(data.items[i].id.videoId);
+		
 		var imageURL = data.items[i].snippet.thumbnails.medium.url;
 		var img = $('<img>', {src: imageURL, class: "pics"});
+		
 		$('.js-search-results').append(img);
 	};
-/*
-	*/
-
 };
 
 // 4) event listeners
