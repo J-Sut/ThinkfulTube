@@ -15,9 +15,9 @@ function getApiData(search, callback) {
 		part: 'snippet',
 		key: 'AIzaSyDGoQFxuEyp6h2c6zoDDVl9L71Rs11R5N0',
 		q: search
-	}
+	};
 
-	$.getJSON(YOUTUBE_URL, query, callback)
+	$.getJSON(YOUTUBE_URL, query, callback);
 };
 
 // 3) f(render-state)
@@ -28,13 +28,31 @@ function renderCallBack(data) {
 	$('.js-search-results').empty();
 	for (var i = 0; data.items.length > i; i++) {
 		console.log(data.items[i].snippet.thumbnails.medium.url);
-		console.log(data.items[i].id.videoId);
+		console.log("imageId: " + data.items[i].id.videoId);
 		
+		var videoLink = "https://www.youtube.com/watch?v=" + data.items[i].id.videoId;
 		var imageURL = data.items[i].snippet.thumbnails.medium.url;
-		var img = $('<img>', {src: imageURL, class: "pics"});
+		var imgElement = $('<img>', {src: imageURL, class: "thumbnails"});
+		var imgWithLink = $('<a></a>', {href: videoLink}).html(imgElement);
 		
-		$('.js-search-results').append(img);
+		console.log("videoLink: " + videoLink);
+		console.log(imgWithLink);
+		
+
+		//wrap the image in <a href = https://www.youtube.com/watch?v= + imageId"> </a>
+
+
+		$('.js-search-results').append(imgWithLink);
+		
+		
 	};
+	addShadow();
+};
+
+function addShadow(){
+	$('.thumbnails').hover(function() {
+		$(this).toggleClass("hoverAction");
+	});
 };
 
 // 4) event listeners
@@ -46,3 +64,26 @@ $('.js-search-form').submit(function(e) {
 
 	getApiData(query, renderCallBack);
 });
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

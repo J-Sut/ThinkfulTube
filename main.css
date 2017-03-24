@@ -2,6 +2,8 @@
 	margin: 10px;
 	padding: 5px;
 	font-family: georgia, serif;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 body {
@@ -12,17 +14,31 @@ h1 {
 	background-color: #BF3F3F; 
 	text-align: center;
 	border-radius: 3px;
+	max-width: 45%;
+	font-size: 3em;
 }
 form, div {
-	margin: auto;
+	text-align: center;
+	width: 100%;
 }
 
-input {
+input, button {
 	font-family: helvetica;
-	font-size: 1.3em;
+	font-size: 1em;
 }
 
-.pics {
+.thumbnails {
 	margin: 15px;
-	border: 5px solid #BF3F3F;
+
+	border: 4px solid #BF3F3F;
+
+}
+
+.hoverAction {
+	box-shadow: 3px 3px 4px #000;
+}
+
+.js-search-results {
+	border-top: 3px double black;
+	width: 80%;
 }
