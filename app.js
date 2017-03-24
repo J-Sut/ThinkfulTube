@@ -27,20 +27,14 @@ function renderCallBack(data) {
 	//clear previous results if any
 	$('.js-search-results').empty();
 	for (var i = 0; data.items.length > i; i++) {
-		console.log(data.items[i].snippet.thumbnails.medium.url);
-		console.log("imageId: " + data.items[i].id.videoId);
-		
+		//console.log(data.items[i].snippet.thumbnails.medium.url);
+		//console.log("imageId: " + data.items[i].id.videoId);
+
+		// grabbing video and image links from the returned JSON object
 		var videoLink = "https://www.youtube.com/watch?v=" + data.items[i].id.videoId;
 		var imageURL = data.items[i].snippet.thumbnails.medium.url;
 		var imgElement = $('<img>', {src: imageURL, class: "thumbnails"});
-		var imgWithLink = $('<a></a>', {href: videoLink}).html(imgElement);
-		
-		console.log("videoLink: " + videoLink);
-		console.log(imgWithLink);
-		
-
-		//wrap the image in <a href = https://www.youtube.com/watch?v= + imageId"> </a>
-
+		var imgWithLink = $('<a></a>', {href: videoLink, target:"_blank"}).html(imgElement);
 
 		$('.js-search-results').append(imgWithLink);
 		
@@ -58,7 +52,6 @@ function addShadow(){
 // 4) event listeners
 
 $('.js-search-form').submit(function(e) {
-//	console.log("from submit event")
 	e.preventDefault();
 	var query = $(this).find('#searchText').val();
 
